@@ -16,15 +16,19 @@ const Config = {
 
   const firebaseDB= firebase.database();
 
-  firebaseDB.ref('countries').push(
-    {
-      country:'India',
-      India:{
-        city:['patiala','amritsar','ambala']
-      }
-    }
-  )
+  const firebaseLooper = (snapshot) => {
+    const data = [];
+    snapshot.forEach((childSnapshot)=>{
+        data.push({
+            ...childSnapshot.val(),
+            id:childSnapshot.key
+        })
+    });
+    return data;
+}
+  
   export {
     firebase,
-    firebaseDB
+    firebaseDB,
+    firebaseLooper
 }

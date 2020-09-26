@@ -77,5 +77,4 @@ class Uploader extends Component {
     }
 
 }
-
 export default Uploader;

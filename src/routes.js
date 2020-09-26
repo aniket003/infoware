@@ -1,21 +1,23 @@
-import React,{Component} from 'react'  ;
+import React from 'react'  ;
 import { Route, Switch } from 'react-router-dom';
 import Home from './components/home/home';
 import Layout from './hoc/layout/layout';
 import SignIn from './components/signin/signin';
+import Dashboard from './components/Dashboard/Dashboard'
 import Registration from './components/registration/registration'
-class Routes extends Component {
-    render(){
+const Routes=(props)=>{
+    
         return(
-              <Layout>
+              <Layout user={props.user}>
                 <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/sign-in" exact component={SignIn} />
                 <Route path="/registration" exact component={Registration}/>
+                <Route path='/dashboard' exact component={Dashboard}/>
                 </Switch>
-                </Layout>
+        </Layout>
             
         )
-    }
+    
 }
 export default Routes;

@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import styles from './signin.module.css';
 import { firebase } from '../../firebase';
-import Form from './forms'
-
+import FormField from './formfields';
 
 class SignIn extends Component {
 
+  
     state = {
         registerError:'',
         loading:false,
@@ -151,7 +151,6 @@ class SignIn extends Component {
             'loading...'
         :
         <div>
-            <button onClick={(event)=>this.submitForm(event,false)}> Register now</button>
             <button onClick={(event)=>this.submitForm(event,true)}> Log in </button>
         </div>
     )
@@ -166,9 +165,9 @@ class SignIn extends Component {
         return(
             <div className={styles.logContainer}>
                 <form onSubmit={(event)=>this.submitForm(event,null)}>
-                    <h2>Register / Log in</h2>
+                    <h2>Admin Log in</h2>
 
-                    <Form
+                    <FormField
                         id={'email'}
                         formdata={this.state.formdata.email}
                         change={(element)=>this.updateForm(element)}
@@ -176,7 +175,7 @@ class SignIn extends Component {
 
                     
 
-                    <Form
+                    <FormField
                         id={'password'}
                         formdata={this.state.formdata.password}
                         change={(element)=>this.updateForm(element)}

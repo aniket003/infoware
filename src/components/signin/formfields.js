@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './forms.module.css';
+import styles from './formfields.module.css';
 
 
-const Form = ({formdata,change,id}) =>{
+const FormFields = ({formdata,change,id}) =>{
 
     const showError = () => {
         let errorMessage = null;
@@ -67,4 +67,4 @@ const Form = ({formdata,change,id}) =>{
 
 }
 
-export default Form;
+export default FormFields;

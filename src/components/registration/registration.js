@@ -30,7 +30,7 @@ class Registration extends Component {
                 element:'input',
                 value:'',
                 label:true,
-                labelText:'Lastname:   ',
+                labelText:'Last Name:   ',
                 config:{
                     name:'lastname_input',
                     type:'text',
@@ -48,13 +48,14 @@ class Registration extends Component {
                 element:'select',
                 value:'',
                 label:true,
-                labelText:'Age:      ',
+                labelText:'Age:         ',
                 config:{
                     name:'age_input',
                     options:[
-                        {val:'1',text:'10-20'},
-                        {val:'2',text:'20-30'},
-                        {val:'3',text:'+30'}
+                        {val:'0',text:'Select age'},
+                        {val:'10-20',text:'10-20'},
+                        {val:'20-30',text:'20-30'},
+                        {val:'+30',text:'+30'}
                     ]
                 },
                 validation:{
@@ -63,17 +64,17 @@ class Registration extends Component {
                 valid:true
             },
             Country:{
-                element:'select:   ',
+                element:'select',
                 value:'',
                 label:true,
-                labelText:'Country:',
+                labelText:'Country:    ',
                 config:{
-                    name:'Country_input',
+                    name:'age_input',
                     options:[
-                        {val:'1',text:'India'},
-                        {val:'2',text:'usa'},
-                        {val:'3',text:'Australia'}
-
+                        {val:'0',text:'Caelect country'},
+                        {val:'India',text:'India'},
+                        {val:'Usa',text:'usa'},
+                        {val:'Australia',text:'australia'}
                     ]
                 },
                 validation:{
@@ -90,9 +91,10 @@ class Registration extends Component {
                 config:{
                     name:'City_input',
                     options:[
-                        {val:'1',text:'manali'},
-                        {val:'2',text:'ambala'},
-                        {val:'3',text:'delhi'}
+                        {val:'0',text:'select city'},
+                        {val:'manali',text:'manali'},
+                        {val:'ambala',text:'ambala'},
+                        {val:'delhi',text:'delhi'}
 
                     ]
                 },
@@ -105,13 +107,14 @@ class Registration extends Component {
                 element:'select',
                 value:'',
                 label:true,
-                labelText:'Area: ',
+                labelText:'Area:     ',
                 
                 config:{
                     name:'Area_input',
                     options:[
-                        {val:'1',text:'model'},
-                        {val:'2',text:'banur'}
+                        {val:'0',text:'select area'},
+                        {val:'model',text:'model'},
+                        {val:'banur',text:'banur'}
 
                     ]
                 },
@@ -147,29 +150,36 @@ class Registration extends Component {
             firebaseDB.ref('users').push(dataToSubmit)
             .then(()=>{
                console.log('new user added') 
+               this.props.history.push('/')
             }).catch( e =>{
                 console.log(e)
             })
         }
-    
+       
     }
+    storeFilename = (filename) => {
+        this.updateForm({id:'image'},filename)
+    }
+
 
     render(){
         return(
             <div className={styles.logContainer}>
                 <form onSubmit={this.submitForm}>
 
-                <Uploader
-                        filename={ (filename)=> this.storeFilename(filename) }
-                    />
+                
 
                     <FormFields
                         formData={this.state.formData}
                         onblur={(newState) => this.updateForm(newState)}
                         change={(newState) => this.updateForm(newState)}
+
+                    />
+                    <Uploader
+                        filename={ (filename)=> this.storeFilename(filename) }
                     />
                      <br/>
-                    <button type="submit" >Submit</button>
+                    <button type="submit"  >Submit</button>
                 </form>
             </div>
         )
